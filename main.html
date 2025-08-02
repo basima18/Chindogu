@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chindoku Q&A</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Baloo 2', sans-serif;
+      text-align: center;
+      background: linear-gradient(270deg, #ffe0b2, #f8bbd0, #d1c4e9, #b2dfdb);
+      background-size: 800% 800%;
+      animation: gradientShift 10s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ✨ Curtain animation container */
+    .curtain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: #f6e0ff;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      animation: fadeOut 1s ease forwards;
+      animation-delay: 5s;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    .curtain img {
+      max-width: 180px;
+      margin-bottom: 20px;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .curtain h1 {
+      font-size: 3.5em;
+      color: #ff7043;
+      margin: 0;
+    }
+
+    .curtain p {
+      font-size: 1.3em;
+      color: #5d4037;
+    }
+
+    /* ✍️ Main App */
+    .container {
+      padding: 50px 20px;
+      max-width: 600px;
+      margin: 60px auto 0 auto;
+      background: #d7cccc;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .container h1 {
+  text-align: center;
+}
+
+.container .tagline {
+  text-align: center;
+  text-transform: uppercase; /* optional for styling "NOT A CHATBOT" */
+  letter-spacing: 2px;       /* optional: gives a more stylized feel */
+}
+
+
+    h1 {
+      font-size: 6em;
+      color: #ff7043;
+      margin-bottom: 0.2em;
+    }
+
+    .tagline {
+      font-size: 1.2em;
+      color: #333;
+      margin-bottom: 40px;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 2px solid #ffab91;
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px 20px;
+      background-color: #ff5722;
+      color: white;
+      font-size: 1em;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background-color: #e64a19;
+    }
+
+    #solutionBox {
+      margin-top: 40px;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .answerLabel {
+      font-weight: bold;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🎬 Curtain Animation Section -->
+  <div class="curtain">
+    <img src="download (10).jpeg" alt="teddy" />
+    <h1>CHINDOKU</h1>
+    <p>Ask your weird problem. Get a weirder solution.</p>
+  </div>
+
+  <!-- 💬 Main Q&A Interface -->
+  <div class="container">
+    <h1>🧸 CHINTU</h1>
+    <p class="tagline">NOT A CHATBOT</p>
+
+    <input type="text" id="questionInput" placeholder="What's your weirdest daily struggle?" />
+    <br>
+    <button id="getSolutionBtn">✨ Weird It Up </button>
+<div id="solutionBox" class="hidden">
+  <p class="answerLabel">Chintu says:</p>
+  <h2 id="solutionText"></h2>
+  <img id="solutionImage" class="hidden" alt="funny chindoku image" style="max-width: 300px; margin-top: 20px;">
+</div>
+
+<script>
+  const solutions = [
+  {
+    question: "what to do when it’s raining and i don’t want my shoes wet?",
+    reply: "Stick mini umbrellas to your shoes with chewing gum. Problem solved, style upgraded.",
+    image: "Chindogu-invention-umbrella-.jpg"
+  },
+  {
+    question: "what to do when i’m hungry in class?",
+    reply: "Stick  a slice of bread inside your notebook using Butter. Eat while you learn.",
+    image: "chindogu-5.jpeg"
+  },
+  {
+  question: `How frustrating is it when you're walking around your house and you notice a few small crumbs on the floor? You could risk straining something in your back by bending over to pick them up.`,
+  reply: "A Broom and Dust Pan Slipper Attachment",
+  image: "broom-and-dust-pan-attachment.jpg"
+},
+
+  {
+  question: "Anyone who wears lipstick knows the struggle involved in getting the application just right without accidentally painting your face a nice shade of red too.",
+  reply: "A Lipstick Application Guide",
+  image: "lipstick-application-guide.jpg"
+},
+
+  {
+    question: "How can I eat hot ramen without burning my mouth when I’m too hungry to wait for it to cool down?",
+    reply: "Attach a mini electric fan to your chopsticks",
+    image: "fan-to-cool-noodle-soup.jpg"
+  },
+  {
+    question: "My baby keeps crawling around the house and the floor is dirty. What should I do?",
+    reply: "Strap microfiber cloths to your baby's arms and legs — now every crawl is a cleaning session.",
+    image: "images.jpeg"
+  }
+];
+
+
+const getSolutionBtn = document.getElementById("getSolutionBtn");
+const questionInput = document.getElementById("questionInput");
+const solutionText = document.getElementById("solutionText");
+const solutionBox = document.getElementById("solutionBox");
+const solutionImage = document.getElementById("solutionImage");
+
+getSolutionBtn.addEventListener("click", () => {
+  const userQuestion = questionInput.value.toLowerCase().trim();
+  let matched = false;
+
+  for (let s of solutions) {
+    if (userQuestion === s.question.toLowerCase()) {
+      solutionText.textContent = s.reply;
+
+      if (s.image) {
+        solutionImage.src = s.image;
+        solutionImage.classList.remove("hidden");
+      } else {
+        solutionImage.classList.add("hidden");
+      }
+
+      matched = true;
+      break;
+    }
+  }
+
+  if (!matched) {
+    solutionText.textContent = "Sorry, Chindoku doesn't have a solution for that yet!";
+    solutionImage.classList.add("hidden");
+  }
+
+  solutionBox.classList.remove("hidden");
+});
+
+  </script>
+</body>
+</html>
